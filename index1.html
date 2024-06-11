@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Test</title>
+  </head>
+  <body>
+    <h1>Hello, Server!</h1>
+    <script>
+      const socket = new WebSocket("ws:localhost:2020");
+      socket.addEventListener("open", function (event) {
+        console.log("WebSocket connection opened");
+
+        let plainPhoneNumber = "";
+        let plainSecretkey = "";
+
+        const message = {
+          flag: "getUsersPinToSendSMS",
+          plainPhoneNumber,
+          plainSecretkey,
+        };
+
+        console.log("Sending message to server:", message);
+        socket.send(JSON.stringify(message));
+      });
+
+      socket.addEventListener("message", function (event) {
+        // Handle received message from the server
+        const message = event.data;
+        console.log("Received message from server:", message);
+      });
+
+      socket.addEventListener("close", function (event) {
+        console.log("WebSocket connection closed", event);
+      });
+
+      socket.addEventListener("error", function (event) {
+        console.error("WebSocket error observed:", event);
+      });
+    </script>
+  </body>
+</html>
