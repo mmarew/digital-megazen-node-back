@@ -60,7 +60,7 @@ let addProducts = async (body) => {
         else return { Message: "Error", Error: "Internal Server Error" };
       }
     } else {
-      return { Message: "Error", Error: "productIsAlreadyAddedBefore" };
+      return { Message: "Error", Error: "Product is already added before" };
     }
   } catch (error) {
     console.error(error);

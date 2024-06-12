@@ -6,12 +6,15 @@ const {
   deleteProducts,
   searchProducts,
 } = require("../Services/Product.Service");
+const responderToClients = require("../Utility/responderToClients");
 
 let addProductsController = async (req, res) => {
   let result = await addProducts(req.body);
-  let { Message } = result;
-  if (Message == "Error") return res.status(400).json(result);
-  else res.json(result);
+  console.log("result", result);
+  responderToClients(res, result);
+  // let { Message } = result;
+  // if (Message == "Error") return res.status(400).json(result);
+  // else res.json(result);
 };
 const searchProductsController = async (req, res) => {
     let result = await searchProducts(req.body, req.query);
